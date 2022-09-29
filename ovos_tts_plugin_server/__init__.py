@@ -32,3 +32,22 @@ class OVOSServerTTSValidator(TTSValidator):
         return OVOSServerTTS
 
 
+OVOSServerTTSConfig = {}
+
+# jarbas public demo instances
+jarbas_hosted = {
+    "S.A.M.": ("https://sam.jarbasai.online", "male"),
+    "PicoTTS": ("https://pico.jarbasai.online", "female"),
+    "Glados": ("https://glados.jarbasai.online", "female"),
+    "Alan Pope [Mimic 1]": ("https://mimic.jarbasai.online", "male"),
+    "R2D2": ("https://r2d2.jarbasai.online", "neutral")
+}
+
+OVOSServerTTSConfig["en-us"] = [
+    {"lang": "en-us",
+     "url": url,
+     "gender": gender,
+     "display_name": f"{display_name} (jarbasai.online)",
+     "offline": False}
+    for display_name, (url, gender) in jarbas_hosted.items()
+]

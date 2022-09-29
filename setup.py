@@ -2,9 +2,12 @@
 from setuptools import setup
 
 PLUGIN_ENTRY_POINT = 'ovos-tts-plugin-server = ovos_tts_plugin_server:OVOSServerTTS'
+CONFIG_ENTRY_POINT = 'ovos-tts-plugin-server.config = ovos_tts_plugin_server:OVOSServerTTSConfig'
+
+
 setup(
     name='ovos-tts-plugin-server',
-    version='0.0.1',
+    version='0.0.2a1',
     description='ovos tts server plugin for mycroft',
     url='https://github.com/OpenVoiceOS/ovos-tts-server-plugin',
     author='JarbasAi',
@@ -32,5 +35,6 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords='mycroft OpenVoiceOS OVOS plugin tts',
-    entry_points={'mycroft.plugin.tts': PLUGIN_ENTRY_POINT}
+    entry_points={'mycroft.plugin.tts': PLUGIN_ENTRY_POINT,
+                  'mycroft.plugin.tts.config': CONFIG_ENTRY_POINT}
 )
