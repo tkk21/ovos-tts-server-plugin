@@ -46,9 +46,11 @@ jarbas_hosted = {
 OVOSServerTTSConfig["en-us"] = [
     {"lang": "en-us",
      "url": url,
-     "gender": gender,
-     "priority": prio,
-     "display_name": f"{display_name} (jarbasai.online)",
-     "offline": False}
+     "meta": {
+         "gender": gender,
+         "priority": prio,
+         "display_name": f"{display_name} (jarbasai.online)",
+         "offline": False}
+     }
     for display_name, (url, gender, prio) in jarbas_hosted.items()
 ]
