@@ -1,8 +1,14 @@
 import requests
-from ovos_plugin_manager.templates.tts import TTS, TTSValidator
+import random
+from ovos_plugin_manager.templates.tts import TTS, TTSValidator, RemoteTTSException
 
 
 class OVOSServerTTS(TTS):
+    public_servers = [
+        "https://pipertts.ziggyai.online",
+        "https://tts.smartgic.io/piper"
+    ]
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs, audio_ext="wav",
                          validator=OVOSServerTTSValidator(self))
@@ -14,11 +20,29 @@ class OVOSServerTTS(TTS):
         params = {"lang": lang, "voice": voice}
         if not voice or voice == "default":
             params.pop("voice")
-        data = requests.get(f"{self.host}/synthesize/{sentence}",
-                            params=params).content
+        if self.host:
+            if isinstance(self.host, str):
+                servers = [self.host]
+            else:
+                servers = self.host
+        else:
+            servers = self.public_servers            
+            random.shuffle(servers)  # Spread the load among all public servers
+        data = self._get_from_servers(params, sentence, servers)
         with open(wav_file, "wb") as f:
             f.write(data)
         return wav_file, None
+
+    def _get_from_servers(self, params: dict, sentence: str, servers: list):
+        for url in servers:
+            try:
+                r = requests.get(f'{url}/synthesize/{sentence}',
+                                 params=params)
+                if r.ok:
+                    return r.content
+            except:
+                continue
+        raise RemoteTTSException(f"All OVOS TTS servers are down!")
 
 
 class OVOSServerTTSValidator(TTSValidator):
@@ -36,24 +60,3 @@ class OVOSServerTTSValidator(TTSValidator):
 
 
 OVOSServerTTSConfig = {}
-
-# jarbas public demo instances
-jarbas_hosted = {
-    "S.A.M.": ("https://sam.jarbasai.online", "male", 100),
-    "PicoTTS": ("https://pico.jarbasai.online", "female", 90),
-    "Glados": ("https://glados.jarbasai.online", "female", 60),
-    "Alan Pope [Mimic 1]": ("https://mimic.jarbasai.online", "male", 80),
-    "R2D2": ("https://r2d2.jarbasai.online", "neutral", 95)
-}
-
-OVOSServerTTSConfig["en-us"] = [
-    {"lang": "en-us",
-     "url": url,
-     "meta": {
-         "gender": gender,
-         "priority": prio,
-         "display_name": f"{display_name} (jarbasai.online)",
-         "offline": False}
-     }
-    for display_name, (url, gender, prio) in jarbas_hosted.items()
-]
