@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.2a6](https://github.com/OpenVoiceOS/ovos-tts-server-plugin/tree/0.0.2a6) (2023-07-02)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-tts-server-plugin/compare/0.0.2a5...0.0.2a6)
+
+**Merged pull requests:**
+
+- removed default host of 0.0.0.0 [\#6](https://github.com/OpenVoiceOS/ovos-tts-server-plugin/pull/6) ([builderjer](https://github.com/builderjer))
+
 ## [0.0.2a5](https://github.com/OpenVoiceOS/ovos-tts-server-plugin/tree/0.0.2a5) (2023-07-02)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-tts-server-plugin/compare/0.0.2a4...0.0.2a5)
