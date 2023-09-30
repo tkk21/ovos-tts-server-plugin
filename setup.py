@@ -46,8 +46,8 @@ def get_description():
         long_description = f.read()
     return long_description
 
-PLUGIN_ENTRY_POINT = 'rvc-tts-plugin = rvc-tts-plugin:RvcTTS'
-CONFIG_ENTRY_POINT = 'rvc-tts-plugin.config = rvc-tts-plugin:RvcTTSConfig'
+PLUGIN_ENTRY_POINT = 'rvc-tts-plugin = rvc_tts_plugin:RvcTTS'
+CONFIG_ENTRY_POINT = 'rvc-tts-plugin.config = rvc_tts_plugin:RvcTTSConfig'
 
 
 setup(
