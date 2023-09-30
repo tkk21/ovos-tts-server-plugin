@@ -29,7 +29,7 @@ class RvcTTS(TTS):
         if not response.ok:
             raise RemoteTTSException(f"tts request failed: {response.text}")
 
-        return response.raw
+        return response.content
 
 class RvcTTSValidator(TTSValidator):
     def __init__(self, tts):
