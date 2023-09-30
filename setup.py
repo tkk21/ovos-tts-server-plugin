@@ -60,7 +60,7 @@ setup(
     author='JarbasAi',
     author_email='jarbasai@mailfence.com',
     license='Apache-2.0',
-    packages=['ovos_tts_plugin_server'],
+    packages=['rvc_tts_plugin'],
     install_requires=required("requirements.txt"),
     zip_safe=True,
     include_package_data=True,
