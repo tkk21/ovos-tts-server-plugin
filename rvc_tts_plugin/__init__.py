@@ -3,10 +3,6 @@ from ovos_plugin_manager.templates.tts import TTS, TTSValidator, RemoteTTSExcept
 
 
 class RvcTTS(TTS):
-    public_servers = [
-        "https://pipertts.ziggyai.online",
-        "https://tts.smartgic.io/piper"
-    ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs, audio_ext="wav",
